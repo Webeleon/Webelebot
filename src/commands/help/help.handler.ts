@@ -12,19 +12,11 @@ export class HelpHandler implements ICommandService {
   async execute(message: Message): Promise<void> {
     message.reply({
       embed: {
-        description: 'Webeleon bot template help',
+        title: 'Webelebot',
         fields: [
           {
             name: '!help',
             value: 'display this message',
-          },
-          {
-            name: '!ping',
-            value: 'reply `pong!`',
-          },
-          {
-            name: '!invite',
-            value: 'Send an invite link for this awesome bot!',
           },
         ],
       },

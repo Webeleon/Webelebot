@@ -2,20 +2,14 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Client, Message } from 'discord.js';
 
 import { ICommandService } from '../discord/interfaces/ICommandService';
-import { PingHandler } from './ping/ping.handler';
-import { InviteHandler } from './invite/invite.handler';
 import { HelpHandler } from './help/help.handler';
 
 @Injectable()
 export class CommandsService {
   commandHandlers: ICommandService[] = [];
 
-  constructor(
-    private readonly pingHandler: PingHandler,
-    private readonly inviteHandler: InviteHandler,
-    private readonly helpHandler: HelpHandler,
-  ) {
-    this.commandHandlers = [pingHandler, inviteHandler, helpHandler];
+  constructor(private readonly helpHandler: HelpHandler) {
+    this.commandHandlers = [helpHandler];
   }
   register(client: Client) {
     client.on('message', async message => await this.messageHandler(message));
