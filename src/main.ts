@@ -5,17 +5,20 @@ import { AppModule } from './app.module';
 import { ConfigService } from './config/config.service';
 import { DiscordService } from './discord/discord.service';
 import { CommandsService } from './commands/commands.service';
+import { ListenersService } from './discord/listeners/listeners.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   const discordService = app.get(DiscordService);
   const commandService = app.get(CommandsService);
+  const discordListenerService = app.get(ListenersService);
 
   await app.listen(config.port, async () => {
     Logger.log(`Server listening on port ${config.port}`);
     const client = await discordService.connect();
     commandService.register(client);
+    discordListenerService.registerAll(client);
   });
 }
 bootstrap();
