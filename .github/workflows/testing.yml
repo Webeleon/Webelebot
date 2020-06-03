@@ -7,11 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  services:
-    mongodb:
-      image: mongo:3.4.23
-      ports:
-        - 27017:27017
+
   build:
     runs-on: ubuntu-latest
 
@@ -26,3 +22,8 @@ jobs:
           npm test
           npm run test:e2e
           npm run test:cov
+    services:
+      mongodb:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
