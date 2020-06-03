@@ -5,18 +5,18 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-
+services:
+  mongodb:
+    image: mongo:3.4.23
+    ports:
+      - 27017:27017
+      
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Start MongoDB v4.2
-          uses: supercharge/mongodb-github-action@1.2.0
-            with:
-              mongodb-version: 4.2
 
       - name: install
         run: npm ci
