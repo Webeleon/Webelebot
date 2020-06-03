@@ -6,9 +6,9 @@ import { AppController } from './app.controller';
 import { ConfigModule } from './config/config.module';
 import { DiscordModule } from './discord/discord.module';
 import { ConfigService } from './config/config.service';
-import { ServerModule } from './server/server.module';
 import { MemberModule } from './member/member.module';
 import { CommandsModule } from './commands/commands.module';
+import { WebelecoinModule } from './webelecoin/webelecoin.module';
 
 const config = new ConfigService();
 @Module({
@@ -17,9 +17,9 @@ const config = new ConfigService();
     ConfigModule,
     DiscordModule,
     ScheduleModule.forRoot(),
-    ServerModule,
     MemberModule,
     CommandsModule,
+    WebelecoinModule,
   ],
   controllers: [AppController],
 })

@@ -1,14 +1,21 @@
 import { Module } from '@nestjs/common';
-import { PingHandler } from './ping/ping.handler';
-import { InviteHandler } from './invite/invite.handler';
 import { CommandsService } from './commands.service';
 import { ConfigModule } from '../config/config.module';
 import { DiscordModule } from '../discord/discord.module';
 import { HelpHandler } from './help/help.handler';
+import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin-daily.handler';
+import { MemberModule } from '../member/member.module';
+import { WebelecoinModule } from '../webelecoin/webelecoin.module';
+import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webelecoin-balance.handler';
 
 @Module({
-  imports: [ConfigModule, DiscordModule],
-  providers: [CommandsService, PingHandler, InviteHandler, HelpHandler],
+  imports: [ConfigModule, DiscordModule, MemberModule, WebelecoinModule],
+  providers: [
+    CommandsService,
+    HelpHandler,
+    WebelecoinDailyHandler,
+    WebelecoinBalanceHandler,
+  ],
   exports: [CommandsService],
 })
 export class CommandsModule {}
