@@ -4,8 +4,8 @@ import { Client, GuildMember, TextChannel } from 'discord.js';
 @Injectable()
 export class ListenersService {
   registerAll(client: Client) {
-    // this.registerGreetings(client);
-    // this.registerMessageSpy(client);
+    this.registerGreetings(client);
+    this.registerMessageSpy(client);
   }
   registerMessageSpy(client: Client) {
     // client.on('message', (message: Message) => {
