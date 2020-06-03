@@ -15,8 +15,8 @@ jobs:
 
       - name: Start MongoDB v4.2
           uses: supercharge/mongodb-github-action@1.2.0
-          with:
-            mongodb-version: 4.2
+            with:
+              mongodb-version: 4.2
 
       - name: install
         run: npm ci
