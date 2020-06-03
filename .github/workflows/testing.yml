@@ -9,18 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
-        mongodb-version: [4.2]
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Start MongoDB v${{ matrix.mongodb-version }}
+      - name: Start MongoDB v4.2
           uses: supercharge/mongodb-github-action@1.2.0
           with:
-            mongodb-version: ${{ matrix.mongodb-version }}
+            mongodb-version: 4.2
 
       - name: install
         run: npm ci
@@ -29,3 +25,4 @@ jobs:
         run: |
           npm test
           npm run test:e2e
+          npm run test:cov
