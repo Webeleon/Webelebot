@@ -5,7 +5,6 @@ export const transactionSchema = new mongoose.Schema(
     sequence: {
       type: Number,
       default: 0,
-      unique: true,
     },
     amount: Number,
     from: String,

@@ -7,6 +7,7 @@ import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin
 import { WebelecoinModule } from '../webelecoin/webelecoin.module';
 import { MemberModule } from '../member/member.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import * as mongoose from 'mongoose';
 
 describe('CommandsService', () => {
   let service: CommandsService;
@@ -17,7 +18,10 @@ describe('CommandsService', () => {
         DiscordModule,
         WebelecoinModule,
         MemberModule,
-        MongooseModule.forRoot('mongodb://localhost/commands_service_test'),
+        MongooseModule.forRoot('mongodb://localhost/commands_service_test', {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        }),
       ],
       providers: [
         CommandsService,
@@ -28,6 +32,9 @@ describe('CommandsService', () => {
     }).compile();
 
     service = module.get<CommandsService>(CommandsService);
+  });
+  afterAll(() => {
+    mongoose.connection.close();
   });
 
   it('should be defined', () => {
