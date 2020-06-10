@@ -54,6 +54,18 @@ export class WebelecoinGrantHandler implements ICommandService {
         fields: [{ name: `balance`, value: `${balance} :webelecoin:` }],
       },
     });
+    if (target.bot) return;
+    const dm = await target.createDM();
+    dm.send({
+      embed: {
+        color: 'GOLD',
+        description: `You have been granted ${amount} :webelecoin:
+*${reason}*
+
+current balance: ${balance} :webelecoin:
+`,
+      },
+    });
   }
 
   sendError(message: Message, reason: string): void {
