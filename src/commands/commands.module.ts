@@ -7,6 +7,7 @@ import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin
 import { MemberModule } from '../member/member.module';
 import { WebelecoinModule } from '../webelecoin/webelecoin.module';
 import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webelecoin-balance.handler';
+import { WebelecoinGrantHandler } from './webelecoin/webelecoin-grant/webelecoin-grant.handler';
 
 @Module({
   imports: [ConfigModule, DiscordModule, MemberModule, WebelecoinModule],
@@ -15,6 +16,7 @@ import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webele
     HelpHandler,
     WebelecoinDailyHandler,
     WebelecoinBalanceHandler,
+    WebelecoinGrantHandler,
   ],
   exports: [CommandsService],
 })
