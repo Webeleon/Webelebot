@@ -23,10 +23,10 @@ export class WebelecoinBalanceHandler implements ICommandService {
     message.reply({
       embed: {
         color: 'GOLD',
-        description: `**Current balance \`${balance}\` webelecoin**`,
+        description: `**Current balance \`${balance}\` :webelecoin:**`,
         fields: lastTransactions.map(t => ({
           name: `[${t.createdAt.toDateString()}] from: ${t.from} to: ${t.to}`,
-          value: `**${t.amount}** (${t.message})`,
+          value: `**${t.amount}**:webelecoin: (${t.message})`,
         })),
       },
     });

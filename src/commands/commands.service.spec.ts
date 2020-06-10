@@ -8,6 +8,7 @@ import { WebelecoinModule } from '../webelecoin/webelecoin.module';
 import { MemberModule } from '../member/member.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
+import { WebelecoinGrantHandler } from './webelecoin/webelecoin-grant/webelecoin-grant.handler';
 
 describe('CommandsService', () => {
   let service: CommandsService;
@@ -28,6 +29,7 @@ describe('CommandsService', () => {
         HelpHandler,
         WebelecoinBalanceHandler,
         WebelecoinDailyHandler,
+        WebelecoinGrantHandler,
       ],
     }).compile();
 
