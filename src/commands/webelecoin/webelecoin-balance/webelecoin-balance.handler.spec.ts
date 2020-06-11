@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 
 describe('WebelecoinBalanceService', () => {
-  let service: WebelecoinBalanceHandler;
+  let webelecoinBalanceHandler: WebelecoinBalanceHandler;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -19,7 +19,9 @@ describe('WebelecoinBalanceService', () => {
       providers: [WebelecoinBalanceHandler],
     }).compile();
 
-    service = module.get<WebelecoinBalanceHandler>(WebelecoinBalanceHandler);
+    webelecoinBalanceHandler = module.get<WebelecoinBalanceHandler>(
+      WebelecoinBalanceHandler,
+    );
   });
 
   afterAll(() => {
@@ -27,6 +29,17 @@ describe('WebelecoinBalanceService', () => {
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(webelecoinBalanceHandler).toBeDefined();
+  });
+
+  it('test for command case insensitive', () => {
+    expect(webelecoinBalanceHandler.test('webelecoin balance')).toBeTruthy();
+    expect(webelecoinBalanceHandler.test('WEBELECOIN BALANCE')).toBeTruthy();
+    expect(
+      webelecoinBalanceHandler.test('should not responde webelecoin balance'),
+    ).toBeFalsy();
+    expect(
+      webelecoinBalanceHandler.test('webelecoin balance targetWallet'),
+    ).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Message } from 'discord.js';
 import { ICommandService } from '../../../discord/interfaces/ICommandService';
 import {
@@ -12,21 +12,26 @@ export class WebelecoinBalanceHandler implements ICommandService {
 
   name: 'webelecoin balance';
   test(content: string): boolean {
-    return /^webelecoin balance/i.test(content);
+    return /^webelecoin balance.*/i.test(content);
   }
 
   async execute(message: Message): Promise<void> {
-    const balance = await this.webelecoinService.balance(message.author.id);
+    const [command, target] =
+      message.content.match(/^webelecoin balance <@!(\d+)>/i) || [];
+    const wallet = target || message.author.id;
+    const balance = await this.webelecoinService.balance(wallet);
     const lastTransactions = await this.webelecoinService.getLastTransactions(
-      message.author.id,
+      wallet,
     );
-    message.reply({
+
+    const title = target ? `**<@!${target}> wallet**\n` : '';
+    message.channel.send({
       embed: {
         color: 'GOLD',
-        description: `**Current balance \`${balance}\` :webelecoin:**`,
+        description: `${title}**Current balance \`${balance}\` webelecoin**`,
         fields: lastTransactions.map(t => ({
           name: `[${t.createdAt.toDateString()}] from: ${t.from} to: ${t.to}`,
-          value: `**${t.amount}**:webelecoin: (${t.message})`,
+          value: `**${t.amount}** webelecoin (${t.message})`,
         })),
       },
     });
