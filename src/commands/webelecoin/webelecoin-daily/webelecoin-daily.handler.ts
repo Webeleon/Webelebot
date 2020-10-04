@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Message } from 'discord.js';
 
-import { ICommandService } from '../../../discord/interfaces/ICommandService';
+import { ICommandHandler } from '../../ICommandHandler';
 import { AMOUNT_DAILY, MemberService } from '../../../member/member.service';
 import { WebelecoinService } from '../../../webelecoin/webelecoin.service';
 
 @Injectable()
-export class WebelecoinDailyHandler implements ICommandService {
+export class WebelecoinDailyHandler implements ICommandHandler {
   constructor(
     private readonly memberService: MemberService,
     private readonly webelecoinService: WebelecoinService,

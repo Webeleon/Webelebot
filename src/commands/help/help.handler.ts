@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Message } from 'discord.js';
-import { ICommandService } from '../../discord/interfaces/ICommandService';
+import { ICommandHandler } from '../ICommandHandler';
 import { AMOUNT_DAILY } from '../../member/member.service';
 
 @Injectable()
-export class HelpHandler implements ICommandService {
+export class HelpHandler implements ICommandHandler {
   name = 'help';
   test(content: string): boolean {
     return /^!help/i.test(content);

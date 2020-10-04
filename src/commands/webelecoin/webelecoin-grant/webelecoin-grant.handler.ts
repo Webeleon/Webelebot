@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Message } from 'discord.js';
 
-import { ICommandService } from '../../../discord/interfaces/ICommandService';
+import { ICommandHandler } from '../../ICommandHandler';
 import {
   SYSTEM_WALLET,
   WebelecoinService,
@@ -10,7 +10,7 @@ import {
 const WEBELEON_ADMIN_ID = `319169441382268928`;
 
 @Injectable()
-export class WebelecoinGrantHandler implements ICommandService {
+export class WebelecoinGrantHandler implements ICommandHandler {
   constructor(private readonly webelecoinService: WebelecoinService) {}
   name: 'webelecoin grant <@user> <amount>';
   test(content: string): boolean {

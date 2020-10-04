@@ -1,13 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Message } from 'discord.js';
-import { ICommandService } from '../../../discord/interfaces/ICommandService';
-import {
-  SYSTEM_WALLET,
-  WebelecoinService,
-} from '../../../webelecoin/webelecoin.service';
+import { ICommandHandler } from '../../ICommandHandler';
+import { WebelecoinService } from '../../../webelecoin/webelecoin.service';
 
 @Injectable()
-export class WebelecoinBalanceHandler implements ICommandService {
+export class WebelecoinBalanceHandler implements ICommandHandler {
   constructor(private readonly webelecoinService: WebelecoinService) {}
 
   name: 'webelecoin balance';

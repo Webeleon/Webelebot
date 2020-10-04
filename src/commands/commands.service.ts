@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Client, Message } from 'discord.js';
 
-import { ICommandService } from '../discord/interfaces/ICommandService';
+import { ICommandHandler } from './ICommandHandler';
 import { HelpHandler } from './help/help.handler';
 import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin-daily.handler';
 import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webelecoin-balance.handler';
@@ -9,7 +9,7 @@ import { WebelecoinGrantHandler } from './webelecoin/webelecoin-grant/webelecoin
 
 @Injectable()
 export class CommandsService {
-  commandHandlers: ICommandService[] = [];
+  commandHandlers: ICommandHandler[] = [];
 
   constructor(
     private readonly helpHandler: HelpHandler,
