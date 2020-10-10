@@ -10,7 +10,7 @@ describe('DiscordService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [ConfigModule],
-      providers: [DiscordService, ConfigService],
+      providers: [DiscordService],
     }).compile();
 
     service = module.get<DiscordService>(DiscordService);
