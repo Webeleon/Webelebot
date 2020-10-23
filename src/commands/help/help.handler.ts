@@ -3,17 +3,21 @@ import { Message } from 'discord.js';
 import { ICommandHandler } from '../ICommandHandler';
 import { AMOUNT_DAILY } from '../../member/member.service';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { version } = require('../../../package.json');
+
 @Injectable()
 export class HelpHandler implements ICommandHandler {
   name = 'help';
   test(content: string): boolean {
-    return /^!help/i.test(content);
+    return /^webelebot help/i.test(content);
   }
 
   async execute(message: Message): Promise<void> {
     message.reply({
       embed: {
         title: 'Webelebot',
+        description: `v${version}`,
         fields: [
           {
             name: '!help',
