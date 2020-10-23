@@ -32,7 +32,7 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           script: |
             whoami
-            cd ${{ secret.DEPLOY_TARGET }}
+            cd ${{ secrets.DEPLOY_TARGET }}
             npm ci --silent
             pm2 stop "webelebot"
             pm2 start npm --name "webelebot" -- start
