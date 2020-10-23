@@ -33,7 +33,9 @@ jobs:
           script: |
             whoami
             cd ${{ secrets.DEPLOY_TARGET }}
+            git pull
             npm ci --silent
+            npm run build
             pm2 stop "webelebot"
             pm2 start npm --name "webelebot" -- start
 
