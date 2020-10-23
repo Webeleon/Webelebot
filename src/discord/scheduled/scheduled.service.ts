@@ -8,7 +8,7 @@ import { DiscordService } from '../discord.service';
 export class ScheduledService {
   constructor(private readonly discordService: DiscordService) {}
 
-  @Cron('0 8,18 * * *')
+  @Cron('0 8 * * 0')
   async bassochetteDailyCoding(): Promise<void> {
     const bassochetteDiscordId = '319169441382268928';
     const codingActivityLink =
