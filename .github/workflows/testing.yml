@@ -1,4 +1,4 @@
-name: Test and deploy
+name: TestAndDeploy
 
 on:
   push:
@@ -24,18 +24,18 @@ jobs:
           npm run test:cov
 
       - name: deploy
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.DEPLOY_HOST }}
-            username: ${{ secrets.DEPLOY_USER }}
-            key: ${{ secrets.DEPLOY_KEY }}
-            port: ${{ secrets.DEPLOY_PORT }}
-            script: |
-              whoami
-              cd ${{ secret.DEPLOY_TARGET }}
-              npm ci --silent
-              pm2 stop "webelebot"
-              pm2 start npm --name "webelebot" -- start
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+            whoami
+            cd ${{ secret.DEPLOY_TARGET }}
+            npm ci --silent
+            pm2 stop "webelebot"
+            pm2 start npm --name "webelebot" -- start
 
     services:
       mongodb:
