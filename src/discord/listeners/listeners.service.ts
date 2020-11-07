@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Client, GuildMember, TextChannel } from 'discord.js';
+import { Client, GuildMember, TextChannel, MessageEmbed } from 'discord.js';
 
 @Injectable()
 export class ListenersService {
@@ -27,8 +27,9 @@ export class ListenersService {
 Test our new game #colonie
     `;
     client.on('guildMemberAdd', (member: GuildMember) => {
+      Logger.log(member, 'guildMemberAdd');
       const channel = member.guild.channels.cache.find(
-        chan => chan.name === 'lobby',
+        (chan) => chan.name === 'lobby',
       );
       if (!channel) {
         Logger.error(
@@ -42,6 +43,29 @@ Test our new game #colonie
           description: greeting,
         },
       });
+
+      const adminLogChannel = member.guild.channels.cache.find(
+        (chan) => chan.name === 'log',
+      );
+      const embed = new MessageEmbed()
+        .setColor('GREEN')
+        .setTitle(`${member.user.username} join the server`)
+        .setDescription(JSON.stringify(member));
+
+      (adminLogChannel as TextChannel).send(embed);
+    });
+
+    client.on('guildMemberRemove', (member: GuildMember) => {
+      Logger.log(member, 'guildMemberRemove');
+      const adminLogChannel = member.guild.channels.cache.find(
+        (chan) => chan.name === 'log',
+      );
+      const embed = new MessageEmbed()
+        .setColor('RED')
+        .setTitle(`${member.user.username} left the server`)
+        .setDescription(JSON.stringify(member));
+
+      (adminLogChannel as TextChannel).send(embed);
     });
   }
 }
