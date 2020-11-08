@@ -16,8 +16,8 @@ export const walletSchema = new mongoose.Schema(
 export interface IWallet {
   balance: number;
   owner: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface IWalletDocument extends IWallet, mongoose.Document {}
