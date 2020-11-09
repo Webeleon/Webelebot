@@ -14,9 +14,9 @@ export const memberSchema = new mongoose.Schema(
 export interface IMember {
   discordUserId: string;
   username?: string;
-  lastDaily: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  lastDaily?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface IMemberDocument extends IMember, mongoose.Document {}
