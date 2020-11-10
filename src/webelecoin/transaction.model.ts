@@ -24,8 +24,8 @@ export interface ITransaction {
   to: string;
   lastTransactionHash: string;
   message: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface ITransactionDocument extends ITransaction, mongoose.Document {}
