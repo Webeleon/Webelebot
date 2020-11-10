@@ -34,8 +34,7 @@ jobs:
             git pull
             npm ci --silent
             npm run build
-            pm2 stop "webelebot"
-            pm2 start npm --name "webelebot" -- start
+            pm2 restart webelebot
 
     services:
       mongodb:
