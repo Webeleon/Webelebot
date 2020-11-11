@@ -9,6 +9,7 @@ import { ConfigService } from './config/config.service';
 import { MemberModule } from './member/member.module';
 import { CommandsModule } from './commands/commands.module';
 import { WebelecoinModule } from './webelecoin/webelecoin.module';
+import { TwitchModule } from './twitch/twitch.module';
 
 const config = new ConfigService();
 @Module({
@@ -20,6 +21,7 @@ const config = new ConfigService();
     MemberModule,
     CommandsModule,
     WebelecoinModule,
+    TwitchModule,
   ],
   controllers: [AppController],
 })

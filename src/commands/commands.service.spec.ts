@@ -6,9 +6,14 @@ import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webele
 import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin-daily.handler';
 import { WebelecoinModule } from '../webelecoin/webelecoin.module';
 import { MemberModule } from '../member/member.module';
-import { MongooseModule } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
 import { WebelecoinGrantHandler } from './webelecoin/webelecoin-grant/webelecoin-grant.handler';
+import { FollowTwitchHandler } from './twitch/follow-twitch/follow-twitch.handler';
+import { UnfollowTwitchHandler } from './twitch/unfollow-twitch/unfollow-twitch.handler';
+import { TwitchModule } from '../twitch/twitch.module';
+import {
+  closeInMongodConnection,
+  rootMongooseTestModule,
+} from '../test-utils/mongo/MongooseTestModule';
 
 describe('CommandsService', () => {
   let service: CommandsService;
@@ -16,13 +21,11 @@ describe('CommandsService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
+        rootMongooseTestModule(),
         DiscordModule,
         WebelecoinModule,
         MemberModule,
-        MongooseModule.forRoot('mongodb://localhost/commands_service_test', {
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-        }),
+        TwitchModule,
       ],
       providers: [
         CommandsService,
@@ -30,13 +33,16 @@ describe('CommandsService', () => {
         WebelecoinBalanceHandler,
         WebelecoinDailyHandler,
         WebelecoinGrantHandler,
+
+        FollowTwitchHandler,
+        UnfollowTwitchHandler,
       ],
     }).compile();
 
     service = module.get<CommandsService>(CommandsService);
   });
-  afterAll(() => {
-    mongoose.connection.close();
+  afterAll(async () => {
+    await closeInMongodConnection();
   });
 
   it('should be defined', () => {
