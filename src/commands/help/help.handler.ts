@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Message } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 import { ICommandHandler } from '../ICommandHandler';
 import { AMOUNT_DAILY } from '../../member/member.service';
 
@@ -14,25 +14,23 @@ export class HelpHandler implements ICommandHandler {
   }
 
   async execute(message: Message): Promise<void> {
-    message.reply({
-      embed: {
-        title: 'Webelebot',
-        description: `v${version}`,
-        fields: [
-          {
-            name: '!help',
-            value: 'display this message',
-          },
-          {
-            name: 'webelecoin daily',
-            value: `Grant ${AMOUNT_DAILY} webelecoins`,
-          },
-          {
-            name: 'webelecoin balance',
-            values: `Display current account balance and last 10 transactions`,
-          },
-        ],
-      },
-    });
+    const embed = new MessageEmbed()
+      .setTitle('Webelebot at your service')
+      .setDescription(`v${version}`)
+      .addFields([
+        {
+          name: '!help',
+          value: 'display this message',
+        },
+        {
+          name: 'webelecoin daily',
+          value: `Grant ${AMOUNT_DAILY} webelecoins`,
+        },
+        {
+          name: 'webelecoin balance',
+          value: `Display current account balance and last 10 transactions`,
+        },
+      ]);
+    await message.channel.send(embed);
   }
 }
