@@ -18,7 +18,8 @@
     "test:watch": "jest --watch --detectOpenHandles",
     "test:cov": "jest --coverage --force-exit --detectOpenHandles",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json --force-exit --detectOpenHandles"
+    "test:e2e": "jest --config ./test/jest-e2e.json --force-exit --detectOpenHandles",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "7.6.18",
@@ -35,6 +36,8 @@
     "rxjs": "6.6.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@nestjs/cli": "7.6.0",
     "@nestjs/schematics": "7.3.1",
     "@nestjs/testing": "7.6.18",
@@ -73,11 +76,6 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
