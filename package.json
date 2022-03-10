@@ -32,7 +32,7 @@
     "discord.js": "12.5.3",
     "dotenv": "8.6.0",
     "mongoose": "5.12.15",
-    "node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "6.6.7"
