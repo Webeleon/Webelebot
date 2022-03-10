@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/Webeleon/Webelebot/compare/v0.1.1...v0.1.2) (2022-03-10)
+
+
+### Features
+
+* remove webelecoin and upgrade bot ([60a6424](https://github.com/Webeleon/Webelebot/commit/60a6424a09a648b00990c2f18e4da9d8095c1ae6))
+
 ### [0.1.1](https://github.com/Webeleon/Webelebot/compare/v0.1.0...v0.1.1) (2021-06-29)
 
 
