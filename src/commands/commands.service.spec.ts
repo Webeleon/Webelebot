@@ -1,12 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommandsService } from './commands.service';
 import { DiscordModule } from '../discord/discord.module';
-import { HelpHandler } from './help/help.handler';
-import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webelecoin-balance.handler';
-import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin-daily.handler';
-import { WebelecoinModule } from '../webelecoin/webelecoin.module';
 import { MemberModule } from '../member/member.module';
-import { WebelecoinGrantHandler } from './webelecoin/webelecoin-grant/webelecoin-grant.handler';
 import { FollowTwitchHandler } from './twitch/follow-twitch/follow-twitch.handler';
 import { UnfollowTwitchHandler } from './twitch/unfollow-twitch/unfollow-twitch.handler';
 import { TwitchModule } from '../twitch/twitch.module';
@@ -23,20 +18,10 @@ describe('CommandsService', () => {
       imports: [
         rootMongooseTestModule(),
         DiscordModule,
-        WebelecoinModule,
         MemberModule,
         TwitchModule,
       ],
-      providers: [
-        CommandsService,
-        HelpHandler,
-        WebelecoinBalanceHandler,
-        WebelecoinDailyHandler,
-        WebelecoinGrantHandler,
-
-        FollowTwitchHandler,
-        UnfollowTwitchHandler,
-      ],
+      providers: [CommandsService, FollowTwitchHandler, UnfollowTwitchHandler],
     }).compile();
 
     service = module.get<CommandsService>(CommandsService);

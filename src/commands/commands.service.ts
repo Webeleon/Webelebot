@@ -2,10 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Client, Message, MessageEmbed } from 'discord.js';
 
 import { ICommandHandler } from './ICommandHandler';
-import { HelpHandler } from './help/help.handler';
-import { WebelecoinDailyHandler } from './webelecoin/webelecoin-daily/webelecoin-daily.handler';
-import { WebelecoinBalanceHandler } from './webelecoin/webelecoin-balance/webelecoin-balance.handler';
-import { WebelecoinGrantHandler } from './webelecoin/webelecoin-grant/webelecoin-grant.handler';
 import { FollowTwitchHandler } from './twitch/follow-twitch/follow-twitch.handler';
 import { UnfollowTwitchHandler } from './twitch/unfollow-twitch/unfollow-twitch.handler';
 
@@ -14,22 +10,10 @@ export class CommandsService {
   commandHandlers: ICommandHandler[] = [];
 
   constructor(
-    private readonly helpHandler: HelpHandler,
-    private readonly webelecoinDailyHandler: WebelecoinDailyHandler,
-    private readonly webelecoinBalanceHandler: WebelecoinBalanceHandler,
-    private readonly webelecoinGrantHandler: WebelecoinGrantHandler,
-
     private readonly followTwitchHandler: FollowTwitchHandler,
     private readonly unfollowTwitchHandler: UnfollowTwitchHandler,
   ) {
-    this.commandHandlers = [
-      helpHandler,
-      webelecoinDailyHandler,
-      webelecoinBalanceHandler,
-      webelecoinGrantHandler,
-      followTwitchHandler,
-      unfollowTwitchHandler,
-    ];
+    this.commandHandlers = [followTwitchHandler, unfollowTwitchHandler];
 
     for (const cmd of this.commandHandlers) {
       Logger.log(
@@ -39,7 +23,10 @@ export class CommandsService {
     }
   }
   register(client: Client) {
-    client.on('message', async (message) => await this.messageHandler(message));
+    client.on(
+      'messageCreate',
+      async (message) => await this.messageHandler(message),
+    );
   }
 
   async messageHandler(message: Message) {
@@ -54,7 +41,7 @@ export class CommandsService {
           const errorEmbed = new MessageEmbed()
             .setColor('RED')
             .setDescription(error.message);
-          message.channel.send(errorEmbed);
+          message.channel.send({ embeds: [errorEmbed] });
           Logger.error(error.message, error.stack, 'messageHandler');
         }
       }

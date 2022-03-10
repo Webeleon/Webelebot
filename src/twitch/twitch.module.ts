@@ -9,6 +9,7 @@ import { TwitchFollowSchema } from './twitch-follow/twitch-follow.model';
 import { TwitchBroadcastService } from './twitch-broadcast/twitch-broadcast.service';
 import { TwitchBroadcastSchema } from './twitch-broadcast/twitch-broadcast.model';
 import { DiscordModule } from '../discord/discord.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DiscordModule } from '../discord/discord.module';
       { name: 'TwitchBroadcast', schema: TwitchBroadcastSchema },
     ]),
     DiscordModule,
+    HttpModule,
   ],
   providers: [
     TwitchService,

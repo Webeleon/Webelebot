@@ -25,13 +25,21 @@ export class TwitchScheduledService {
 
   @Cron('* * * * *')
   async streamWatcher() {
+    Logger.verbose(
+      `discord ready? ${this.discord.ready}`,
+      TwitchScheduledService.name,
+    );
     if (!this.discord.ready) return;
 
     const followedChannels = await this.twitchFollow.getAllUserLogins();
+    Logger.verbose(
+      `followed channel count ${followedChannels.length}`,
+      TwitchScheduledService.name,
+    );
     if (followedChannels.length === 0) return;
 
     const credentials = await this.twitch.getClientCredientials();
-
+    debug(credentials);
     const streamsUnfiltered = await this.twitch.fetchStreamByUserLogins(
       followedChannels,
       credentials,
@@ -68,7 +76,7 @@ export class TwitchScheduledService {
       const discordChannel = await discordClient.channels.fetch(
         notificationChannelId,
       );
-      (discordChannel as TextChannel).send(embed);
+      await (discordChannel as TextChannel).send({ embeds: [embed] });
     }
   }
 

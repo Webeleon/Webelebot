@@ -6,9 +6,7 @@ import { AppController } from './app.controller';
 import { ConfigModule } from './config/config.module';
 import { DiscordModule } from './discord/discord.module';
 import { ConfigService } from './config/config.service';
-import { MemberModule } from './member/member.module';
 import { CommandsModule } from './commands/commands.module';
-import { WebelecoinModule } from './webelecoin/webelecoin.module';
 import { TwitchModule } from './twitch/twitch.module';
 
 const config = new ConfigService();
@@ -18,9 +16,7 @@ const config = new ConfigService();
     ConfigModule,
     DiscordModule,
     ScheduleModule.forRoot(),
-    MemberModule,
     CommandsModule,
-    WebelecoinModule,
     TwitchModule,
   ],
   controllers: [AppController],

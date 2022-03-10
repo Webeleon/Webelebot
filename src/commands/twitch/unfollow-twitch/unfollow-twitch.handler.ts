@@ -20,7 +20,7 @@ export class UnfollowTwitchHandler implements ICommandHandler {
 
   async execute(message: Message): Promise<void> {
     const requester = message.guild.members.resolve(message.author.id);
-    if (!requester.hasPermission(Permissions.FLAGS.ADMINISTRATOR)) {
+    if (!requester.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
       throw new Error(
         `Only user with administrator permissions can configure twitch follow`,
       );
@@ -38,6 +38,6 @@ export class UnfollowTwitchHandler implements ICommandHandler {
       .setDescription(
         `${twtichUserLogin} will no longer be notified in this channel!`,
       );
-    await message.channel.send(embed);
+    await message.channel.send({ embeds: [embed] });
   }
 }

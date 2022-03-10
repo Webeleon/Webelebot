@@ -14,7 +14,10 @@ export class ConfigService {
   constructor() {
     config();
     this.port = parseInt(process.env.PORT) || 5000;
-    this.mongoURL = process.env.MONGO_URL || 'mongodb://localhost/webelebot';
+    this.mongoURL =
+      process.env.MONGO_URL ||
+      process.env.MONGO_ADDON_URI ||
+      'mongodb://localhost/webelebot';
 
     this.discordToken = process.env.DISCORD_API_TOKEN || '';
     this.discordClientId = process.env.DISCORD_CLIENT_ID || '';
