@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommandsService } from './commands.service';
 import { DiscordModule } from '../discord/discord.module';
-import { MemberModule } from '../member/member.module';
 import { FollowTwitchHandler } from './twitch/follow-twitch/follow-twitch.handler';
 import { UnfollowTwitchHandler } from './twitch/unfollow-twitch/unfollow-twitch.handler';
 import { TwitchModule } from '../twitch/twitch.module';
@@ -15,12 +14,7 @@ describe('CommandsService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        rootMongooseTestModule(),
-        DiscordModule,
-        MemberModule,
-        TwitchModule,
-      ],
+      imports: [rootMongooseTestModule(), DiscordModule, TwitchModule],
       providers: [CommandsService, FollowTwitchHandler, UnfollowTwitchHandler],
     }).compile();
 

@@ -16,7 +16,7 @@ export class ConfigService {
     this.port = parseInt(process.env.PORT) || 5000;
     this.mongoURL =
       process.env.MONGO_URL ||
-      process.env.MONGO_ADDON_URI ||
+      process.env.MONGODB_ADDON_URI ||
       'mongodb://localhost/webelebot';
 
     this.discordToken = process.env.DISCORD_API_TOKEN || '';
